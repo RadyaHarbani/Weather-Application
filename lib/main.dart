@@ -23,7 +23,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-  void getApiWeather() async {
+  Future<void> getApiWeather() async {
     setState(() {
       isLoaded = false;
     });
@@ -32,6 +32,8 @@ class _MyAppState extends State<MyApp> {
       Uri.parse(
           'https://api.openweathermap.org/data/2.5/weather?q=Semarang&lon=10.99&appid=bd5e378503939ddaee76f12ad7a97608&units=metric'),
     );
+
+    //sesi API telah habis
 
     weatherModel = WeatherModel.fromJson(
       json.decode(
@@ -87,7 +89,9 @@ class _MyAppState extends State<MyApp> {
           ],
         ),
         body: isLoaded == false
-            ? CircularProgressIndicator()
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
             : Container(
                 child: Column(
                   children: [
